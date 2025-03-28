@@ -1,117 +1,117 @@
 # Pet Shop Backend
 
-## Описание
+## Description
 
-Это backend часть проекта интернет-магазина товаров для домашних животных. Он реализует REST API для работы с категориями, продуктами и заказами.
+This is the backend part of the project of an online store of goods for pets. It implements REST API for working with categories, products and orders.
 
-## Структура проекта
+## Project structure
 
 - `/database`
-  - `/models`
-    - `category.js`: Модель категории
-    - `product.js`: Модель продукта
-  - `database.js`: Настройка подключения к базе данных SQLite
+- `/models`
+- `category.js`: Category model
+- `product.js`: Product model
+- `database.js`: SQLite database connection setup
 - `/public`
-  - `/category_img`: Изображения категорий
-  - `/product_img`: Изображения продуктов
+- `/category_img`: Category images
+- `/product_img`: Product images
 - `/routes`
-  - `categories.js`: Маршруты для работы с категориями
-  - `order.js`: Маршруты для работы с заказами
-  - `products.js`: Маршруты для работы с продуктами
-  - `sale.js`: Маршруты для работы с продажами
-- `index.js`: Главный файл сервера
-- `database.sqlite`: Файл базы данных SQLite
-- `package.json` и `package-lock.json`: Файлы зависимостей проекта
-- `README.md`: Описание проекта
+- `categories.js`: Category routes
+- `order.js`: Order routes
+- `products.js`: Product routes
+- `sale.js`: Sales routes
+- `index.js`: Main server file
+- `database.sqlite`: SQLite database file
+- `package.json` and `package-lock.json`: Project dependency files
+- `README.md`: Project description
 
-## Установка и запуск
+## Installation and run
 
-1. Клонируйте репозиторий:
-
-```bash
-git clone <URL репозитория>
-```
-
-2. Перейдите в папку проекта:
+1. Clone the repository:
 
 ```bash
-cd <имя папки проекта>
+git clone <repo URL>
 ```
 
-3. Установите зависимости:
+2. Go to the project folder:
+
+```bash
+cd <project folder name>
+```
+
+3. Install dependencies:
 
 ```bash
 npm install
 ```
 
-4. Запустите сервер:
+4. Run the server:
 
 ```bash
 npm run dev
 ```
 
-Сервер будет запущен и будет слушать запросы на порту 3333.
+The server will be started and will listen for requests on port 3333.
 
-## Проверка работы API
+## Test the API
 
-Вы можете проверить работу API через Postman или браузер.
+You can test the API via Postman or a browser.
 
-### Примеры API маршрутов
+### API Route Examples
 
-- Получение всех категорий: `GET /categories/all`
-- Получение продуктов по категории: `GET /categories/:id`
-- Получение всех продуктов: `GET /products/all`
-- Получение продукта по ID: `GET /products/:id`
-- Оформление заказа: `POST /order/send`
-- Оформление заявки на купон: `POST /sale/send`
+- Get all categories: `GET /categories/all`
+- Get products by category: `GET /categories/:id`
+- Get all products: `GET /products/all`
+- Get product by ID: `GET /products/:id`
+- Place an order: `POST /order/send`
+- Place a coupon request: `POST /sale/send`
 
-### Пример запроса
+### Request Example
 
-#### Получение всех категорий
+#### Get all categories
 
 ```bash
 axios.get('http://localhost:3333/categories/all')
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error(error);
+});
 ```
 
-#### Оформление заказа
+#### Checkout
 
 ```bash
 const orderData = {
-  name: "John Doe",
-  phone: "1234567890",
-  email: "johndoe@example.com",
-  products: [
-    {
-      id: 1,
-      quantity: 2
-    },
-    {
-      id: 2,
-      quantity: 1
-    }
-  ]
+name: "John Doe",
+phone: "1234567890",
+email: "johndoe@example.com",
+products: [
+{
+id: 1,
+quantity: 2
+},
+{
+id: 2,
+quantity: 1
+}
+]
 };
 
 axios.post('http://localhost:3333/order/send', orderData, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Content-Type': 'application/json'
+}
 })
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error(error);
+});
 ```
 
-## Используемые технологии
+## Technologies used
 
 - Node.js
 - Express
