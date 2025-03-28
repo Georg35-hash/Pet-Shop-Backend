@@ -1,50 +1,45 @@
-const { request } = require("express");
 const express = require("express");
+const cors = require("cors");
 const categories = require("./routes/categories");
 const sale = require("./routes/sale");
 const order = require("./routes/order");
 const products = require("./routes/products");
 const sequelize = require("./database/database");
-const cors = require("cors");
 const Category = require("./database/models/category");
 const Product = require("./database/models/product");
+
 const PORT = process.env.PORT || 3333;
 
 Category.hasMany(Product);
 
 const app = express();
 app.use(express.static("public"));
+
 app.use(
   cors({
     origin: "*",
   })
 );
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use("/categories", categories);
 app.use("/products", products);
 app.use("/sale", sale);
 app.use("/order", order);
 
-app.use(express.json());
-
 const start = async () => {
   try {
-    await sequelize
-      .sync()
-      .then((result) => {
-        console.log("Database synced successfully!");
-      })
-      .catch((err) => {
-        console.log("Error syncing database:", err);
-        throw err;
-      });
+    await sequelize.sync({ force: false });
+    console.log("Database synced successfully!");
 
     app.listen(PORT, () => {
-      console.log(`\n\nServer started on ${PORT} port...`);
+      console.log(`\n\nServer started on port ${PORT}...`);
     });
   } catch (err) {
-    console.log("Error starting server:", err);
+    console.error("Error starting server:", err);
   }
 };
+
 start();
