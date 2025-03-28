@@ -17,7 +17,7 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "https://pet-shop-ten-azure.vercel.app/",
+    origin: "origin: /.vercel.app$/",
     credentials: true,
   })
 );
