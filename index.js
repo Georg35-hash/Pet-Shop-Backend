@@ -30,18 +30,21 @@ app.use(express.json());
 
 const start = async () => {
   try {
-    await sequelize.sync().then(
-      (result) => {
-        /*console.log(result) */
-      },
-      (err) => console.log(err)
-    );
+    await sequelize
+      .sync()
+      .then((result) => {
+        console.log("Database synced successfully!");
+      })
+      .catch((err) => {
+        console.log("Error syncing database:", err);
+        throw err;
+      });
 
     app.listen(PORT, () => {
       console.log(`\n\nServer started on ${PORT} port...`);
     });
   } catch (err) {
-    console.log(err);
+    console.log("Error starting server:", err);
   }
 };
 start();
