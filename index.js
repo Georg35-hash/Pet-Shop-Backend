@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path"); // Для работы с путями
 const categories = require("./routes/categories");
 const sale = require("./routes/sale");
 const order = require("./routes/order");
@@ -15,6 +16,7 @@ Category.hasMany(Product);
 const app = express();
 app.use(express.static("public"));
 
+// Настройка CORS
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -29,6 +31,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Обслуживаем изображения и другие статики
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
