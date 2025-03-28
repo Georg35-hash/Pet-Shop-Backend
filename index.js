@@ -17,7 +17,15 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "origin: /.vercel.app$/",
+    origin: function (origin, callback) {
+      console.log("Origin:", origin);
+      const regex = /\.vercel\.app$/;
+      if (regex.test(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
