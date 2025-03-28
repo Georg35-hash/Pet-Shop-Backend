@@ -17,7 +17,7 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: "https://pet-shop-ten-pied.vercel.app",
+    origin: "*",
     credentials: true,
   })
 );
