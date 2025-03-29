@@ -16,24 +16,14 @@ Category.hasMany(Product);
 const app = express();
 app.use(express.static("public"));
 
-// Настройка CORS
 app.use(
-  cors({
-    origin: function (origin, callback) {
-      console.log("Origin:", origin);
-      const regex = /\.vercel\.app$/;
-      if (regex.test(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
+  "/public",
+  express.static(path.join(__dirname, "public"), {
+    setHeaders: (res) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
     },
-    credentials: true,
   })
 );
-
-// Обслуживаем изображения и другие статики
-app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
