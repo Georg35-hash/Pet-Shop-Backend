@@ -18,7 +18,7 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: ["pet-shop-react-ebon.vercel.app"],
+    origin: ["https://pet-shop-react-ebon.vercel.app"],
     credentials: true,
   })
 );
