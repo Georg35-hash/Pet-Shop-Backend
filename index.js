@@ -17,11 +17,9 @@ const app = express();
 app.use(express.static("public"));
 
 app.use(
-  "/public",
-  express.static(path.join(__dirname, "public"), {
-    setHeaders: (res) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-    },
+  cors({
+    origin: ["pet-shop-react-ebon.vercel.app"],
+    credentials: true,
   })
 );
 
